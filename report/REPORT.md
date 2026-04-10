@@ -119,8 +119,6 @@ Chạy `ChunkingStrategyComparator().compare()` trên 1 tài liệu:
 | Tài liệu  | Strategy              | Chunk Count | Avg Length | Preserves Context? |
 |----------|----------------------|------------|------------|--------------------|
 | blhs.txt | FixedSizeChunker     | 1147       | 499.85     | Thấp               |
-| blhs.txt | SentenceChunker      | 1108       | 495.39     | Trung bình         |
-| blhs.txt | RecursiveChunker     | 1538       | 356.57     | Cao                |
 ### Strategy Của Tôi
 
 **Loại:** RecursiveChunker
@@ -144,9 +142,8 @@ Chạy `ChunkingStrategyComparator().compare()` trên 1 tài liệu:
 
 | Tài liệu | Strategy | Chunk Count | Avg Length | Retrieval Quality? |
 |-----------|----------|-------------|------------|--------------------|
-| | best baseline | SentenceChunker|  671|835 | Giu dươc context|
-| | **của tôi** |  RecursiveChunker (`recursive`) |1538 |356.57 | Giu duoc context|
-
+| | baseline | FixedSizeChunker|  1147 |499.85 | Thap|
+| | **của tôi** |  RecursiveChunker (`recursive`) |1538 |356.57 | Binh thuong
 ### So Sánh Với Thành Viên Khác
 
 | Thành viên | Strategy | Retrieval Score (/10) | Điểm mạnh | Điểm yếu |
