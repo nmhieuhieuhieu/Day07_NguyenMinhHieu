@@ -1,7 +1,9 @@
 # Báo Cáo Lab 7: Embedding & Vector Store
 
 **Họ tên:** Nguyễn Minh Hiếu - 2A202600180
+
 **Nhóm:** C401-C5
+
 **Ngày:** 10/4/2026
 
 ---
@@ -38,26 +40,11 @@ Cosine similarity tập trung vào hướng của vector thay vì độ dài, gi
 Document 10,000 ký tự, `chunk_size = 500`, `overlap = 50`. Bao nhiêu chunks?
 
 ### Trình bày phép tính:
-Sử dụng công thức cho chiến lược Fixed Size Chunker:
+- Step = 500 - 50 = 450  
 
-- Step:
-  
-  $$
-  Step = Chunk\_Size - Overlap = 500 - 50 = 450
-  $$
-
-- Số lượng chunks:
-
-  $$
-  Number\ of\ chunks = \left\lceil \frac{Total\ Length - Overlap}{Step} \right\rceil
-  $$
-
-  $$
-  = \left\lceil \frac{10000 - 50}{450} \right\rceil
-  = \left\lceil \frac{9950}{450} \right\rceil
-  \approx \left\lceil 22.11 \right\rceil
-  $$
-
+- Số chunks = ⌈(10000 - 50) / 450⌉  
+               = ⌈9950 / 450⌉  
+               ≈ ⌈22.11⌉ = **23**
 ### Đáp án:
 **23 chunks**
 
@@ -67,9 +54,7 @@ Sử dụng công thức cho chiến lược Fixed Size Chunker:
 
 - Step mới:
 
-  $$
   500 - 100 = 400
-  $$
 
 - Số lượng chunks sẽ **tăng lên** vì bước nhảy nhỏ hơn.
 
@@ -309,4 +294,4 @@ Chạy 5 benchmark queries của nhóm trên implementation cá nhân của bạ
 | Results | Cá nhân | 9 / 10 |
 | Core implementation (tests) | Cá nhân | 30 / 30 |
 | Demo | Nhóm | 5 / 5 |
-| **Tổng** | | **83 / 90** |
+| **Tổng** | | **85 / 90** |
