@@ -139,6 +139,7 @@ Chạy `ChunkingStrategyComparator().compare()` trên 1 tài liệu:
 | Tôi | SentenceChunker | 4.5| Chia đúng theo câu nên ngữ nghĩa rõ ràng, dễ hiểu với embedding model. Chunk thường sạch và ít bị cắt giữa ý.|Có thể mất context nếu thông tin nằm ở nhiều câu liên tiếp. Một số câu quá ngắn hoặc quá dài gây mất cân bằng chunk size. |
 |Phúc| FixedSizeChunker| 3.5| Rất đơn giản, dễ implement, tốc độ xử lý nhanh. Chunk size ổn định nên dễ kiểm soát token.| Không giữ ngữ cảnh tốt, dễ cắt giữa câu hoặc điều luật, làm giảm chất lượng embedding và retrieval.|
 | Quân | RecursiveChunker, chunk_size=200 | 7 |giữ ngữ cảnh tốt vì tận dụng được cấu trúc đơn vị của câu|khó implement hơn tương đối và có chi phí tính toán cao hơn|
+
 **Strategy nào tốt nhất cho domain này? Tại sao?**
 > Recursive chunking là strategy phù hợp nhất cho domain văn bản pháp luật vì nó chia văn bản theo cấu trúc tự nhiên như đoạn và câu, giúp giữ nguyên ngữ cảnh của các điều luật. Điều này cải thiện chất lượng embedding và tăng độ chính xác của retrieval trong hệ thống RAG.
 
@@ -263,7 +264,7 @@ Chạy 5 benchmark queries của nhóm trên implementation cá nhân của bạ
 | 1 | Người từ đủ 14 đến dưới 16 tuổi chịu TNHS về tội nào? | Điều 9: phân loại tội phạm theo mức độ nghiêm trọng | 0.62 | ✗ | Trả lời nhầm sang phân loại tội phạm, không liệt kê đúng các tội cụ thể |
 | 2 | Trộm cắp tài sản ≥500 triệu bị phạt bao nhiêu? | Điều 173 khoản 1: trộm cắp tài sản cơ bản | 0.71 | ✗ | Trả lời mức phạt 6 tháng đến 3 năm (sai mức nghiêm trọng) |
 | 3 | Các tình tiết giảm nhẹ gồm những gì? | Điều 52: các tình tiết tăng nặng | 0.65 | ✗ | Nhầm sang tình tiết tăng nặng, trả lời sai hoàn toàn |
-| 4 | Gây tai nạn chết người rồi bỏ chạy bị xử lý? | Điều 260 khoản 1: vi phạm giao thông gây hậu quả | 0.74 | △ | Chỉ nói gây tai nạn chết người (1–5 năm), thiếu yếu tố bỏ chạy |
+| 4 | Gây tai nạn chết người rồi bỏ chạy bị xử lý? | Điều 260 khoản 1: vi phạm giao thông gây hậu quả | 0.74 | ✓ | Chỉ nói gây tai nạn chết người (1–5 năm), thiếu yếu tố bỏ chạy |
 | 5 | Tội phạm phân thành mấy loại? | Điều 9: phân loại tội phạm | 0.88 | ✓ | Trả lời đúng 4 loại nhưng thiếu chi tiết mức hình phạt tối đa |
 
 ---
