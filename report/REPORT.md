@@ -1,8 +1,8 @@
 # Báo Cáo Lab 7: Embedding & Vector Store
 
-**Họ tên:** [Tên sinh viên]
-**Nhóm:** [Tên nhóm]
-**Ngày:** [Ngày nộp]
+**Họ tên:** Nguyễn Minh Hiếu - 2A202600180
+**Nhóm:** C401-C5
+**Ngày:** 10/4/2026
 
 ---
 
@@ -157,9 +157,6 @@ Chạy `ChunkingStrategyComparator().compare()` trên 1 tài liệu:
 
 **Strategy nào tốt nhất cho domain này? Tại sao?**
 > Với domain văn bản pháp luật như Bộ luật Hình sự Việt Nam 2015, Recursive Chunking thường là strategy tốt nhất trong ba phương pháp (Recursive, Sentence, Fixed).
-
-**Strategy nào tốt nhất cho domain này? Tại sao?**
-> *Viết 2-3 câu:*
 
 ---
 
