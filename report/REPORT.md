@@ -133,12 +133,15 @@ Chạy `ChunkingStrategyComparator().compare()` trên 1 tài liệu:
 
 | Thành viên | Strategy | Retrieval Score (/10) | Điểm mạnh | Điểm yếu |
 |-----------|----------|----------------------|-----------|----------|
-| Tôi | RecursiveChunker | 4.5| Chia đúng theo câu nên ngữ nghĩa rõ ràng, dễ hiểu với embedding model. Chunk thường sạch và ít bị cắt giữa ý.|Có thể mất context nếu thông tin nằm ở nhiều câu liên tiếp. Một số câu quá ngắn hoặc quá dài gây mất cân bằng chunk size. | 
-| Nam | SentenceChunker| 4.2| Giữ ngữ cảnh tốt vì chia theo cấu trúc văn bản (paragraph → sentence → word). Phù hợp với tài liệu có cấu trúc như luật. Giảm việc cắt giữa câu.| Phức tạp hơn khi triển khai, đôi khi chunk không đều kích thước, có thể tạo nhiều chunk hơn baseline.|
+| Tú nam | RecursiveChunker| 4.2| Giữ ngữ cảnh tốt vì chia theo cấu trúc văn bản (paragraph → sentence → word). Phù hợp với tài liệu có cấu trúc như luật. Giảm việc cắt giữa câu.| Phức tạp hơn khi triển khai, đôi khi chunk không đều kích thước, có thể tạo nhiều chunk hơn baseline.|
+| Hữu Hưng | RecursiveChunker, chunk_size=500 | 4 | Tôn trọng ranh giới Điều/khoản (`\n\n`→`\n`), chunk coherent với cấu trúc pháp lý | 1447 chunks nhỏ (avg 387 ký tự) — nhiều chunk quá, score dàn đều|
+| Khánh Nam | RecursiveChunker, chunk_size=200 | 6 | Điểm mạnh: Chia đoạn nhỏ giúp tăng độ chính xác khi truy xuất các đoạn thông tin ngắn, giảm nhiễu trong mỗi chunk, phù hợp với dữ liệu có cấu trúc rõ ràng. | Điểm yếu: Chunk size 200 khá nhỏ nên dễ làm mất ngữ cảnh giữa các đoạn, tăng số lượng chunk khiến retrieval tốn tài nguyên hơn, có thể giảm hiệu quả với nội dung dài cần nhiều context. |
+| Tôi | SentenceChunker | 4.5| Chia đúng theo câu nên ngữ nghĩa rõ ràng, dễ hiểu với embedding model. Chunk thường sạch và ít bị cắt giữa ý.|Có thể mất context nếu thông tin nằm ở nhiều câu liên tiếp. Một số câu quá ngắn hoặc quá dài gây mất cân bằng chunk size. |
 |Phúc| FixedSizeChunker| 3.5| Rất đơn giản, dễ implement, tốc độ xử lý nhanh. Chunk size ổn định nên dễ kiểm soát token.| Không giữ ngữ cảnh tốt, dễ cắt giữa câu hoặc điều luật, làm giảm chất lượng embedding và retrieval.|
-
+| Quân | RecursiveChunker, chunk_size=200 | 7 |giữ ngữ cảnh tốt vì tận dụng được cấu trúc đơn vị của câu|khó implement hơn tương đối và có chi phí tính toán cao hơn|
 **Strategy nào tốt nhất cho domain này? Tại sao?**
-> Với domain văn bản pháp luật như Bộ luật Hình sự Việt Nam 2015, Recursive Chunking thường là strategy tốt nhất trong ba phương pháp (Recursive, Sentence, Fixed).
+> Recursive chunking là strategy phù hợp nhất cho domain văn bản pháp luật vì nó chia văn bản theo cấu trúc tự nhiên như đoạn và câu, giúp giữ nguyên ngữ cảnh của các điều luật. Điều này cải thiện chất lượng embedding và tăng độ chính xác của retrieval trong hệ thống RAG.
+
 
 ---
 
